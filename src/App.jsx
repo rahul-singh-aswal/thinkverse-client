@@ -1,7 +1,8 @@
 import "./App.css";
 
 function App() {
-  return <>lms-frontend</>;
+  return <>
+  <h1 className="bg-amber-400">LMS</h1></>;
 }
 
 export default App;

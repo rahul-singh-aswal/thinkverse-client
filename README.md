@@ -32,3 +32,7 @@ npm start
 App will run at: `http://localhost:3000`
 
 ---
+### For setting up Tailwind CSS, please follow the official documentation:
+🔗 https://tailwindcss.com/docs/installation
+
+---
