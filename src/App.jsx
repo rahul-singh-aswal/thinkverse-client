@@ -1,11 +1,14 @@
-import "./App.css";
+import './App.css';
+import Footer from './Components/Footer';
 
 function App() {
-  return <>
-  <h1 className="bg-amber-400">LMS
-    </h1>
-    
-    <h2>shfdsaklh</h2></>;
+  return (
+    <>
+      <h1 className="bg-amber-400">LMS</h1>
+
+      <Footer/>
+    </>
+  );
 }
 
 export default App;
