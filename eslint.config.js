@@ -19,6 +19,8 @@ export default [
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      "simple-import-sort": simpleImportSort,
+      
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -28,6 +30,8 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "simple-import-sort/imports": "error",
+      "simple-import-sort/exports": "error",
     },
   },
 ]
