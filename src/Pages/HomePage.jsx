@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
   return (
     <HomeLayout>
-      <div className="pt-10 text-white flex items-center justify-center gap-10 mx-16 h-[90vh]">
+      <div className="pt-10 text-white flex items-center justify-center gap-10 mx-16 h-[90vh] sm:flex-col md:flex-row">
         {/* for platform details */}
-        <div className="w-1/2 space-y-6">
+        <div className="w-1/2 ">
           <h1 className="text-5xl font-semibold">
             Find out best <span className="text-yellow-500 font-bold">Online Courses</span>
           </h1>
