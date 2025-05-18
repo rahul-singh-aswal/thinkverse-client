@@ -5,7 +5,7 @@ import { AiFillCloseCircle } from 'react-icons/ai';
 import Footer from '../Components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 
-const HomeLayout = ({ children }) => {
+const Layout = ({ children }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -41,7 +41,7 @@ const HomeLayout = ({ children }) => {
     navigate('/');
   }
   return (
-    <div className="min-h-[90vh]">
+    <div className="min-h-[90vh] overflow-x-hidden">
       {/* adding the daisy ui drawer */}
       <div className="drawer absolute left-0 z-50 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -54,7 +54,7 @@ const HomeLayout = ({ children }) => {
         {/* drawer sidebar */}
         <div className="drawer-side w-0">
           <label htmlFor="my-drawer" aria-label="close sidebar" className="drawer-overlay"></label>
-          <ul className="menu bg-base-200   text-base-content min-h-[90vh] sm:w-70 p-4 relative text-xl">
+          <ul className="menu bg-base-200   text-base-content min-h-[100vh] sm:w-70 p-4 relative text-xl">
             {/* Sidebar content here */}
             <li className="w-fit">
               <button onClick={hideDrawer}>
@@ -114,4 +114,4 @@ const HomeLayout = ({ children }) => {
   );
 };
 
-export default HomeLayout;
+export default Layout;

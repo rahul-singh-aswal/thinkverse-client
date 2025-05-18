@@ -1,11 +1,11 @@
 import React from 'react';
-import HomeLayout from '../Layouts/HomeLayout';
-import homePageMainImage from '../assets/Images/homePageMainImage.png';
+import Layout from '../Layouts/Layout';
+import homePageMainImage from '../assets/images/homePageMainImage.png';
 import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <HomeLayout>
+    <Layout>
       <div className="pt-10 text-white flex items-center justify-center gap-10 mx-16 h-[90vh] sm:flex-col md:flex-row">
         {/* for platform details */}
         <div className="w-1/2 ">
@@ -37,7 +37,7 @@ const HomePage = () => {
           <img src={homePageMainImage} alt="home page image" />
         </div>
       </div>
-    </HomeLayout>
+    </Layout>
   );
 };
 
