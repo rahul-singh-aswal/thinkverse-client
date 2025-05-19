@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import Footer from '../Components/Footer';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../Redux/Slices/AuthSlice';
 
 const Layout = ({ children }) => {
   const dispatch = useDispatch();
@@ -32,14 +33,16 @@ const Layout = ({ children }) => {
   };
 
   // function to handle logout
-  function handleLogout(e) {
-    e.preventDefault();
+  const handleLogout = async (event) => {
+    event.preventDefault();
 
-    // const res = await dispatch(logout())
-    // if (res?.payload?success)
+    // calling logout action
+    const res = await dispatch(logout());
 
-    navigate('/');
-  }
+    // redirect to home page if true
+    if (res?.payload?.success) navigate('/');
+  };
+
   return (
     <div className="min-h-[90vh] overflow-x-hidden">
       {/* adding the daisy ui drawer */}
