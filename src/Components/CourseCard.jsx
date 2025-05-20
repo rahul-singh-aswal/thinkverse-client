@@ -7,7 +7,7 @@ const CourseCard = ({ data }) => {
   return (
     <div
       onClick={() => navigate('/course/description', { state: { ...data } })}
-      className="text-white w-[22rem] h-[430px] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 hover:shadow-[0_0_10px_white]"
+      className="text-white flex-col p-4 w-[22rem] h-[400px] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 hover:shadow-[0_0_10px_white]"
     >
       <div className="overflow-hidden">
         <img
@@ -18,7 +18,7 @@ const CourseCard = ({ data }) => {
       </div>
 
       {/* course details */}
-      <div className="p-3 space-y-1 text-white">
+      <div className="p-3 space-y-1 text-white b-0">
         <h2 className="text-xl font-bold text-yellow-500 line-clamp-2">{data?.title}</h2>
         <p className="line-clamp-2">{data?.description}</p>
         <p className="font-semibold">
