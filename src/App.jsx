@@ -8,6 +8,7 @@ import About from './Pages/About';
 import NotFound from './Pages/NotFound';
 import SignUp from './Pages/SignUp';
 import Login from './Pages/Login';
+import Courses from './Pages/Course/CourseList';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<About />} />
+        <Route path="/courses" element={<Courses />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
         <Route path="*" element={<NotFound />} />
