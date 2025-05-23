@@ -11,11 +11,13 @@ export default function About() {
   return (
     <Layout>
       <div className="pl-20 pt-10 flex flex-col text-white">
+        {/* heading */}
+        <h1 className='text-center  font-bold text-3xl'>About Us</h1>
         {/* creating the about page main section */}
         <div className="flex items-center gap-5 mx-10">
           {/* out moto section */}
           <section className="w-1/2 space-y-10">
-            <h1 className="text-5xl text-yellow-500 font-semibold">
+            <h1 className="text-4xl text-yellow-500 font-semibold">
               Affordable and Quality Education
             </h1>
             <p className="text-xl text-gray-200">

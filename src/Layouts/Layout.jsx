@@ -69,9 +69,14 @@ const Layout = ({ children }) => {
             </li>
 
             {isLoggedIn && role === 'ADMIN' && (
+              <>
               <li>
                 <Link to="/admin/dashboard">Admin Dashboard</Link>
               </li>
+               <li>
+               <Link to="/courses/create">Create New Course</Link>
+             </li>
+             </>
             )}
             <li>
               <Link to="/courses">Courses</Link>
