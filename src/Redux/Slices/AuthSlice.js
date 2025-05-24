@@ -5,7 +5,7 @@ import axiosInstance from '../../Helpers/axiosInstance.js';
 const initialState = {
   isLoggedIn: localStorage.getItem('isLoggedIn') || false,
   role: localStorage.getItem('role') || '',
-  data: JSON.parse(localStorage.getItem('data')) || {},
+  data: localStorage.getItem('data') ? JSON.parse(localStorage.getItem('data')) : {},
 };
 
 // function to handle signup
@@ -71,6 +71,37 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   }
 });
 
+// function to fetch user data
+export const getUserData = createAsyncThunk('/user/details', async () => {
+  try {
+    const res = await axiosInstance.get('/user/me');
+    return res?.data;
+  } catch (error) {
+    toast.error(error.message);
+  }
+});
+
+// function to handle update profile
+// function to update user profile
+export const updateProfile = createAsyncThunk('/user/update/profile', async (data) => {
+  try {
+    let res = axiosInstance.post('/user/update', data);
+
+    toast.promise(res, {
+      loading: 'Updating...',
+      success: (data) => {
+        return data?.data?.message;
+      },
+      error: 'Failed to update profile',
+    });
+    // getting response resolved here
+    // res = await res;
+    return (await res).data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message);
+  }
+});
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -91,6 +122,15 @@ const authSlice = createSlice({
         localStorage.clear();
         state.isLoggedIn = false;
         state.data = {};
+      })
+      // for user details
+      .addCase(getUserData.fulfilled, (state, action) => {
+        localStorage.setItem('data', JSON.stringify(action?.payload?.user));
+        localStorage.setItem('isLoggedIn', true);
+        localStorage.setItem('role', action?.payload?.user?.role);
+        state.isLoggedIn = true;
+        state.data = action?.payload?.user;
+        state.role = action?.payload?.user?.role;
       });
   },
 });
