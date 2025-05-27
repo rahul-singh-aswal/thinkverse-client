@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-hot-toast';
-import axiosInstance from '../Helper/axiosInstance';
+import axiosInstance from '../../Helpers/axiosInstance.js';
 
 const initialState = {
   key: '',
@@ -12,7 +12,7 @@ const initialState = {
 };
 
 // function to get the api key
-export const getRazorPayId = createAsyncThunk('/razorPayId/get', async () => {
+export const getRazorPayId = createAsyncThunk('/razorpayId/get', async () => {
   try {
     const res = await axiosInstance.get('/payments/razorpay-key');
     return res.data;
@@ -41,7 +41,7 @@ export const verifyUserPayment = createAsyncThunk('/verifyPayment', async (payme
     });
     return res?.data;
   } catch (error) {
-    toast.error('error?.response?.data?.message');
+    toast.error(error?.response?.data?.message);
   }
 });
 

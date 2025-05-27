@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const HomePage = () => {
   return (
     <Layout>
-      <div className="pt-10 text-white flex items-center justify-center gap-10 mx-16 h-[90vh] sm:flex-col md:flex-row">
+      <div className="pt-10  text-white flex items-center justify-center gap-10 mx-16 h-[90vh] sm:flex-col md:flex-row ">
         {/* for platform details */}
         <div className="w-1/2 ">
           <h1 className="text-5xl font-semibold">

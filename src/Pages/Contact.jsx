@@ -55,7 +55,7 @@ const Contact = () => {
 
   return (
     <Layout>
-      <div className="flex items-center justify-center h-[90vh] ">
+      <div className="flex items-center justify-center h-[90vh]  ">
         <form
           onSubmit={handleFormSubmit}
           className="flex flex-col items-center justify-center gap-2 p-5 rounded-md text-white shadow-[0_0_10px_white] w-[22rem]"
