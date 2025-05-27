@@ -44,7 +44,7 @@ const CourseDescription = () => {
               {role === 'ADMIN' || new Date(data?.subscription?.validTill) > currDate ? (
                 <button
                   onClick={() =>
-                    navigate('/course/displaylectures', {
+                    navigate('/courses/lectures', {
                       state: { ...state },
                     })
                   }

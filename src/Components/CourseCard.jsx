@@ -6,7 +6,7 @@ const CourseCard = ({ data }) => {
 
   return (
     <div
-      onClick={() => navigate('/course/description', { state: { ...data } })}
+      onClick={() => navigate('/courses/description', { state: { ...data } })}
       className="text-white flex-col p-4 w-[22rem] h-[400px] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700 hover:shadow-[0_0_10px_white]"
     >
       <div className="overflow-hidden">

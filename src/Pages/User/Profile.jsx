@@ -74,7 +74,7 @@ const Profile = () => {
 
             <Link
               to={userData?.email === 'test@gmail.com' ? '/denied' : '/user/edit-profile'}
-              className="w-1/2 border border-yellow-600 hover:border-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
+              className="w-1/2  bg-yellow-600 hover:bg-yellow-700 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
             >
               <button>Edit Profile</button>
             </Link>
@@ -89,14 +89,17 @@ const Profile = () => {
             </button>
           )}
 
-          {userData?.subscription?.status !== 'active' && (
+
+          {/* {userData?.subscription?.status !== 'active' && (
             <button
               onClick={() => navigate('/checkout')}
               className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
             >
               Extend Subscription
             </button>
-          )}
+          )} */}
+
+         
         </div>
       </div>
     </Layout>
