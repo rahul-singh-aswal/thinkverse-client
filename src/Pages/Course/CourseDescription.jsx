@@ -7,6 +7,7 @@ const CourseDescription = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { role, data } = useSelector((state) => state.auth);
+  const currDate = new Date();
 
   useEffect(() => {
     // scroll to the top on page render
@@ -40,8 +41,7 @@ const CourseDescription = () => {
                 </p>
               </div>
 
-              {/* adding the subscribe button */}
-              {role === 'ADMIN' || data?.subscription?.status === 'active' ? (
+              {role === 'ADMIN' || new Date(data?.subscription?.validTill) > currDate ? (
                 <button
                   onClick={() =>
                     navigate('/course/displaylectures', {

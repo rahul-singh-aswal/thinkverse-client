@@ -117,10 +117,10 @@ const Checkout = () => {
               <BiRupee /> <span>99</span>only
             </p>
 
-            <div className="text-gray-200">
+            {/* <div className="text-gray-200">
               <p>100% refund at cancellation</p>
               <p>* Terms & Condition Applied</p>
-            </div>
+            </div> */}
           </div>
 
           <button

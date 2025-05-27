@@ -1,12 +1,31 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../../Layouts/Layout';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { cancelCourseBundle } from '../../Redux/Slices/razorpaySlice';
+import { getUserData } from '../../Redux/Slices/AuthSlice';
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const currDate = new Date();
 
   const userData = useSelector((state) => state?.auth?.data);
+
+  // function to handle the cancel subscription of course
+  const handleCourseCancelSubscription = async () => {
+    toast('Initiating cancellation');
+    await dispatch(cancelCourseBundle());
+    await dispatch(getUserData());
+    toast.success('Cancellation completed');
+    navigate('/');
+  };
+
+  useEffect(() => {
+    // getting user details
+    dispatch(getUserData());
+  }, []);
 
   return (
     <Layout>
@@ -24,9 +43,24 @@ const Profile = () => {
             <p>Email :</p>
             <p>{userData?.email}</p>
             <p>Role :</p>
-            <p>{userData?.role}</p>
+            <p>{userData?.role === 'ADMIN' ? 'Instructor' : 'Learner'}</p>
             <p>Subscription :</p>
-            <p>{userData?.subscription?.status === 'active' ? 'Active' : 'Inactive'}</p>
+            <p>
+              {userData?.subscription?.status === 'active' ||
+              new Date(userData?.subscription?.validTill) > currDate
+                ? 'Active'
+                : 'Inactive'}
+            </p>
+            <p>Valid Till :</p>
+            <p>
+              {new Date(userData?.subscription?.validTill) > currDate
+                ? ` ${new Date(userData?.subscription?.validTill).toLocaleDateString('en-GB', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}`
+                : ''}
+            </p>
           </div>
 
           {/* button to change the password */}
@@ -47,8 +81,20 @@ const Profile = () => {
           </div>
 
           {userData?.subscription?.status === 'active' && (
-            <button className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center">
+            <button
+              onClick={handleCourseCancelSubscription}
+              className="w-full bg-red-600 hover:bg-red-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
+            >
               Cancel Subscription
+            </button>
+          )}
+
+          {userData?.subscription?.status !== 'active' && (
+            <button
+              onClick={() => navigate('/checkout')}
+              className="w-full bg-yellow-600 hover:bg-yellow-500 transition-all ease-in-out duration-300 rounded-sm py-2 font-semibold cursor-pointer text-center"
+            >
+              Extend Subscription
             </button>
           )}
         </div>
