@@ -4,6 +4,7 @@ import { AiOutlineArrowLeft } from 'react-icons/ai';
 import { BsPersonCircle } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import { getUserData, updateProfile } from '../../Redux/Slices/AuthSlice';
 import Layout from '../../Layouts/Layout';
 
@@ -14,68 +15,74 @@ const EditProfile = () => {
 
   const [data, setData] = useState({
     fullName: '',
-    avatar: undefined,
-    // userID: useSelector((state) => state?.auth?.data?._id),
+    avatar: null, // file object
   });
 
-  // function to handle the image upload
   const getImage = (event) => {
     event.preventDefault();
-    // getting the image
     const uploadedImage = event.target.files[0];
-
-    // if image exists then getting the url link of it
     if (uploadedImage) {
-      setData({
-        ...data,
+      setData((prev) => ({
+        ...prev,
         avatar: uploadedImage,
-      });
+      }));
       const fileReader = new FileReader();
       fileReader.readAsDataURL(uploadedImage);
-      fileReader.addEventListener('load', function () {
-        setImagePreview(this.result);
-      });
+      fileReader.onload = () => {
+        setImagePreview(fileReader.result);
+      };
     }
   };
 
-  // function to set the name of user
   const setName = (event) => {
     const { name, value } = event.target;
-    const newUserData = { ...data, [name]: value };
-    setData(newUserData);
+    setData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
-  // function to handle the form submission
+  const uploadToCloudinary = async (file) => {
+    try {
+      const cloudData = new FormData();
+      cloudData.append('file', file);
+      cloudData.append('upload_preset', 'thinkverse_uploads'); // 🔁 change this if needed
+      cloudData.append('cloud_name', 'djfymii3c'); // 🔁 your Cloudinary cloud name
+
+      const response = await axios.post(
+        'https://api.cloudinary.com/v1_1/djfymii3c/image/upload',
+        cloudData
+      );
+
+      return response.data.url; // Only return URL
+    } catch (error) {
+      toast.error('Image upload failed');
+      throw error;
+    }
+  };
+
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    // checking for the empty field
-    // if (!data.fullName || !data.avatar) {
-    //   toast.error("All fields are mandatory");
-    //   return;
-    // }
-
-    // checking the length of name
-    if (data.fullName.length < 5) {
-      toast.error('Name should have more than 5 characters');
+    if (!data.fullName || data.fullName.length < 5) {
+      toast.error('Name should be at least 5 characters long');
       return;
     }
 
-    // creating the form data from the existing data
-    const formData = new FormData();
-    formData.append('fullName', data.fullName);
-    formData.append('avatar', data.avatar);
+    let cloudImageURL = '';
+    if (data.avatar) {
+      cloudImageURL = await uploadToCloudinary(data.avatar);
+    }
 
-    // const newUserData = [data.userID, formData];
+    const updatedUser = {
+      fullName: data.fullName,
+      avatar: cloudImageURL || '', // Send empty if no new image
+    };
 
-    // dispatching the api call using the thunk
-    // await dispatch(updateProfile(newUserData));
-    await dispatch(updateProfile(formData));
-
-    // fetching the data to update
+    // dispatch redux action with clean object
+    await dispatch(updateProfile(updatedUser));
     await dispatch(getUserData());
 
-    // redirect to user profile page
     navigate('/user/profile');
   };
 
@@ -88,13 +95,12 @@ const EditProfile = () => {
         >
           <h1 className="text-center text-2xl font-bold">Edit Profile Page</h1>
 
-          {/* input for image file */}
           <label className="cursor-pointer" htmlFor="image_uploads">
             {previewImage ? (
               <img
                 className="w-28 h-28 rounded-full m-auto"
                 src={previewImage}
-                alt="preview image"
+                alt="preview"
               />
             ) : (
               <BsPersonCircle className="w-28 h-28 rounded-full m-auto" />
@@ -125,7 +131,7 @@ const EditProfile = () => {
             />
           </div>
 
-          <Link to={'/user/profile'}>
+          <Link to="/user/profile">
             <p className="link text-accent cursor-pointer flex items-center justify-center w-full gap-2">
               <AiOutlineArrowLeft /> Back to Profile
             </p>

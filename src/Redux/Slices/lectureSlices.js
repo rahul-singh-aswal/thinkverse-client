@@ -28,28 +28,73 @@ export const getCourseLecture = createAsyncThunk('/course/lecture/get', async (c
 
 
 // function to add new lecture to the course
-export const addCourseLecture = createAsyncThunk('/course/lecture/add', async (data) => {
+// export const addCourseLecture = createAsyncThunk('/course/lecture/add', async (data) => {
+//   const formData = new FormData();
+//   formData.append('lecture', data.lecture);
+//   formData.append('title', data.title);
+//   formData.append('description', data.description);
+
+//   try {
+//     const res = axiosInstance.post(`/courses/${data.id}`, formData);
+
+//     toast.promise(res, {
+//       loading: 'Adding the lecture...',
+//       success: 'Lecture added successfully',
+//       error: 'Failed to add lecture',
+//     });
+
+//     const response = await res;
+
+//     return response.data;
+//   } catch (error) {
+//     toast.error(error?.response?.data?.message);
+//   }
+// });
+
+const uploadToCloudinary = async (file) => {
   const formData = new FormData();
-  formData.append('lecture', data.lecture);
-  formData.append('title', data.title);
-  formData.append('description', data.description);
+  formData.append("file", file);
+  formData.append("upload_preset", "thinkverse_uploads"); // 🔁 Replace this
+  formData.append("cloud_name", "djfymii3c");        // 🔁 Replace this
 
-  try {
-    const res = axiosInstance.post(`/courses/${data.id}`, formData);
+  const res = await axios.post(
+    "https://api.cloudinary.com/v1_1/djfymii3c/video/upload",
+    formData
+  );
 
-    toast.promise(res, {
-      loading: 'Adding the lecture...',
-      success: 'Lecture added successfully',
-      error: 'Failed to add lecture',
-    });
+  return {
+    public_id: res.data.public_id,
+    secure_url: res.data.secure_url,
+  };
+};
 
-    const response = await res;
+export const addCourseLecture = createAsyncThunk(
+  "/course/addlecture",
+  async (data) => {
+    try {
+     {console.log(data)}
 
-    return response.data;
-  } catch (error) {
-    toast.error(error?.response?.data?.message);
+      // end metadata to backend
+      const res = axiosInstance.post(`/courses/${data.id}`, {
+        title: data.title,
+        description: data.description,
+        lecture: {public_id: data.lecture.data.public_id, secure_url: data.lecture.data.secure_url},
+      });
+
+      toast.promise(res, {
+        loading: "Adding the lecture...",
+        success: "Lecture added successfully",
+        error: "Failed to add lecture",
+      });
+
+      const response = await res;
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message || "Something went wrong");
+      throw error;
+    }
   }
-});
+);
 
 // function to delete the lecture from the course
 export const deleteCourseLecture = createAsyncThunk('/course/lecture/delete', async (data) => {

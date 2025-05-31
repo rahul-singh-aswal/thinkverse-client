@@ -73,7 +73,7 @@ const DisplayLectures = () => {
                       state: { ...courseDetails },
                     })
                   }
-                  className="btn-primary px-2 py-1 rounded-md font-semibold text-sm"
+                  className="btn btn-primary px-2 py-1 rounded-md font-semibold text-sm"
                 >
                   Add New Lecture
                 </button>
@@ -90,7 +90,7 @@ const DisplayLectures = () => {
                     {role === 'ADMIN' && (
                       <button
                         onClick={() => handleLectureDelete(courseDetails?._id, element?._id)}
-                        className="btn-primary px-2 py-1 rounded-md font-semibold text-sm"
+                        className="btn btn-accent px-2 py-1 rounded-md font-semibold text-sm"
                       >
                         Delete Lecture
                       </button>

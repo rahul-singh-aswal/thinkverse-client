@@ -17,7 +17,7 @@ const Signup = () => {
     fullName: '',
     email: '',
     password: '',
-    avatar: '',
+    // avatar: '',
   });
 
   // function to set the signup data
@@ -89,7 +89,7 @@ const Signup = () => {
     formData.append('fullName', signupData.fullName);
     formData.append('email', signupData.email);
     formData.append('password', signupData.password);
-    formData.append('avatar', signupData.avatar);
+    // formData.append('avatar', signupData.avatar);
 
     // calling create account action
     const res = await dispatch(createAccount(formData));
@@ -102,7 +102,7 @@ const Signup = () => {
       fullName: '',
       email: '',
       password: '',
-      avatar: '',
+      // avatar: '',
     });
     setImagePreview('');
   };
@@ -128,14 +128,14 @@ const Signup = () => {
               <BsPersonCircle className="w-24 h-24 rounded-full m-auto" />
             )}
           </label>
-          <input
+          {/* <input
             onChange={getImage}
             className="hidden"
             type="file"
             id="image_uploads"
             name="image_uploads"
             accept=".jpg, .jpeg, .png"
-          />
+          /> */}
 
           {/* input for name */}
           <div className="flex flex-col gap-1">
