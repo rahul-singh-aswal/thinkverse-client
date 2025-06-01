@@ -26,45 +26,44 @@ export const getAllCourses = createAsyncThunk('/course/get', async () => {
 });
 
 // function to create a new course
-export const createNewCourse = createAsyncThunk(
-  "/courses/create",
-  async (data) => {
-    try {
-      // creating the form data from user data
-      let formData = new FormData();
-      formData.append("title", data?.title);
-      formData.append("description", data?.description);
-      formData.append("category", data?.category);
-      formData.append("createdBy", data?.createdBy);
-      formData.append("thumbnail", data?.thumbnail);
+export const createNewCourse = createAsyncThunk('/courses/create', async (data) => {
+  try {
+    // end metadata to backend
+    
+    const res = axiosInstance.post(`/courses/`, {
+      title: data.title,
+      description: data.description,
+      createdBy: data.createdBy,
+      category: data.category,
+      thumbnail: {
+        public_id: data.thumbnail.data.public_id,
+        secure_url: data.thumbnail.data.secure_url,
+      },
+    });
 
-      const res = axiosInstance.post("/courses", formData);
+    toast.promise(res, {
+      loading: 'Creating the course...',
+      success: 'Course created successfully',
+      error: 'Failed to create lecture',
+    });
 
-      toast.promise(res, {
-        loading: "Creating the course...",
-        success: "Course created successfully",
-        error: "Failed to create course",
-      });
-
-      const response = await res;
-      return response.data;
-    } catch (error) {
-      toast.error(error?.response?.data?.message);
-    }
+    const response = await res;
+    return response.data;
+  } catch (error) {
+    toast.error(error?.response?.data?.message || 'Something went wrong');
+    throw error;
   }
-);
-
-
+});
 
 // function to delete the course
-export const deleteCourse = createAsyncThunk("/course/delete", async (id) => {
+export const deleteCourse = createAsyncThunk('/course/delete', async (id) => {
   try {
     const res = axiosInstance.delete(`courses/${id}`);
 
     toast.promise(res, {
-      loading: "Deleting the course...",
-      success: "Courses deleted successfully",
-      error: "Failed to delete course",
+      loading: 'Deleting the course...',
+      success: 'Courses deleted successfully',
+      error: 'Failed to delete course',
     });
 
     const response = await res;
@@ -76,37 +75,62 @@ export const deleteCourse = createAsyncThunk("/course/delete", async (id) => {
 });
 
 // function to update the course details
-export const updateCourse = createAsyncThunk("/course/update", async (data) => {
+// export const updateCourse = createAsyncThunk('/course/update', async (data) => {
+//     try {
+//     // end metadata to backend
+//     console.log('Course ID:', data.courseId);
+//     console.log('Request URL:', `/courses/${data.courseId}`);
+//     console.log(object)
+//     const res = axiosInstance.put(`/courses/${data.courseId}`, {
+//       title: data.title,
+//       description: data.description,
+//       createdBy: data.createdBy,
+//       category: data.category,
+//       thumbnail: data.thumbnail,
+//     });
+
+//     toast.promise(res, {
+//       loading: 'Updating the course...',
+//       success: 'Course updated successfully',
+//       error: 'Failed to update course frm thunk',
+//     });
+
+//     const response = await res;
+//     return response.data;
+//   } catch (error) {
+//     toast.error(error?.response?.data?.message || 'Something went wrong');
+//     throw error;
+//   }
+
+// });
+
+
+export const updateCourse = createAsyncThunk('/course/update', async (data) => {
   try {
-    // creating the form data from user data
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("category", data.category);
-    formData.append("createdBy", data.createdBy);
-    formData.append("description", data.description);
-    // backend is not allowing change of thumbnail
-    // if (data.thumbnail) {
-    //   formData.append("thumbnail", data.thumbnail);
-    // }
+    // Logging useful info
+    console.log('Course ID:', data.courseId);
+    console.log('Request URL:', `/courses/${data.courseId}`);
 
-    const res = axiosInstance.put(`/courses/${data.id}`, {
+    // Send request to backend
+    const res = await axiosInstance.put(`/courses/${data.courseId}`, {
       title: data.title,
-      category: data.category,
-      createdBy: data.createdBy,
       description: data.description,
+      createdBy: data.createdBy,
+      category: data.category,
+      thumbnail: data.thumbnail,
     });
 
-    toast.promise(res, {
-      loading: "Updating the course...",
-      success: "Course updated successfully",
-      error: "Failed to update course",
+    // Toast messages
+    toast.promise(Promise.resolve(res), {
+      loading: 'Updating the course...',
+      success: 'Course updated successfully',
+      error: 'Failed to update course from thunk',
     });
 
-    const response = await res;
-    return response.data;
+    return res.data;
   } catch (error) {
-    console.log(error);
-    toast.error(error?.response?.data?.message);
+    toast.error(error?.response?.data?.message || 'Something went wrong');
+    throw error;
   }
 });
 

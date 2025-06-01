@@ -1,13 +1,31 @@
 import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Layout from '../../Layouts/Layout';
+import { deleteCourse, getAllCourses } from '../../Redux/Slices/courseSlice';
 
 const CourseDescription = () => {
   const { state } = useLocation();
+  {
+    console.log(state);
+  }
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const { role, data } = useSelector((state) => state.auth);
   const currDate = new Date();
+
+  // function to handle the course delete
+  const handleCourseDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete the course?')) {
+      const res = await dispatch(deleteCourse(id));
+
+      // fetching the new updated data for the course
+      if (res.payload.success) {
+        await dispatch(getAllCourses());
+      }
+      navigate('/courses');
+    }
+  };
 
   useEffect(() => {
     // scroll to the top on page render
@@ -48,14 +66,14 @@ const CourseDescription = () => {
                       state: { ...state },
                     })
                   }
-                  className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300"
+                  className="  btn flex bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all  ease-in-out duration-300"
                 >
                   Watch Lectures
                 </button>
               ) : (
                 <button
                   onClick={() => navigate('/checkout')}
-                  className="bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300"
+                  className="btn bg-yellow-600 text-xl rounded-md text-center font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300"
                 >
                   Subscribe to Course
                 </button>
@@ -70,6 +88,28 @@ const CourseDescription = () => {
             <p className="text-yellow-500 font-bold">Course Description :</p>
 
             <p>{state.description}</p>
+            {role === 'ADMIN' ? (
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => handleCourseDelete(state?._id)}
+                  className="btn bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 rounded-md font-bold"
+                >
+                  Delete Course
+                </button>
+                <button
+                  onClick={() =>
+                    navigate('/course/update', {
+                      state: { ...state },
+                    })
+                  }
+                  className="btn bg-blue-500 hover:bg-blue-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 rounded-md font-bold"
+                >
+                  Edit Course Details
+                </button>
+              </div>
+            ) : (
+              <></>
+            )}
           </div>
         </div>
       </div>

@@ -72,7 +72,7 @@ export const addCourseLecture = createAsyncThunk(
   "/course/addlecture",
   async (data) => {
     try {
-     {console.log(data)}
+    //  {console.log(data)}
 
       // end metadata to backend
       const res = axiosInstance.post(`/courses/${data.id}`, {
@@ -101,7 +101,8 @@ export const deleteCourseLecture = createAsyncThunk('/course/lecture/delete', as
   console.log(data);
   try {
     const res = axiosInstance.delete(
-      `/courses/?courseId=${data.courseId}&lectureId=${data.lectureId}`
+      // `/courses/?courseId=${data.courseId}/lectures/?lectureId=${data.lectureId}`
+       `/courses/${data.courseId}/lectures/${data.lectureId}`
     );
 
     toast.promise(res, {
