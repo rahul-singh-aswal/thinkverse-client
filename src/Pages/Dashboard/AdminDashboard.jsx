@@ -101,7 +101,7 @@ const AdminDashboard = () => {
         <h1 className="text-center text-3xl font-semibold text-yellow-500">Admin Dashboard</h1>
 
         {/* creating the records card and chart for sales and user details */}
-        <div className="grid grid-cols-2 gap-4 m-auto mx-10">
+        <div className="md:grid grid-cols-2 gap-4 m-auto mx-10">
           {/* displaying the users chart and data */}
           <div className="flex flex-col items-center gap-10 p-5 shadow-lg rounded-md  border-white border-[0.5px]">
             {/* for displaying the pie chart */}
@@ -189,7 +189,7 @@ const AdminDashboard = () => {
             </button>
           </div>
 
-          <table className="table overflow-x-scroll">
+          <table className="table  overflow-x-scroll">
             <thead>
               <tr>
                 <th className="text-center">S No.</th>

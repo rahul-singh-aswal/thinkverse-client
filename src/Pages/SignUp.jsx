@@ -114,10 +114,10 @@ const Signup = () => {
           onSubmit={createNewAccount}
           className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_white]"
         >
-          <h1 className="text-center text-2xl font-bold">Registration Page</h1>
+          <h1 className="text-center text-2xl font-bold">Welcome to <span className='text-blue-400'>ThinkVerse</span></h1>
 
-          {/* input for image file */}
-          <label className="cursor-pointer" htmlFor="image_uploads">
+          
+          {/* <label className="cursor-pointer" htmlFor="image_uploads">
             {previewImage ? (
               <img
                 className="w-24 h-24 rounded-full m-auto"
@@ -127,7 +127,7 @@ const Signup = () => {
             ) : (
               <BsPersonCircle className="w-24 h-24 rounded-full m-auto" />
             )}
-          </label>
+          </label> */}
           {/* <input
             onChange={getImage}
             className="hidden"

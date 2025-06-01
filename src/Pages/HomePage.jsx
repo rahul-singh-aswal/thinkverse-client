@@ -20,12 +20,12 @@ const HomePage = () => {
           {/* for buttons */}
           <div className="space-x-6">
             <Link to={'/courses'}>
-              <button className="bg-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">
+              <button className="my-3 bg-yellow-500 px-5 py-2 rounded-md font-semibold text-lg cursor-pointer hover:bg-yellow-600 transition-all ease-in-out duration-300">
                 Explore Courses
               </button>
             </Link>
             <Link to={'/contact'}>
-              <button className="border border-yellow-500 px-5 py-3 rounded-md font-semibold text-lg cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300">
+              <button className=" my-3 border border-yellow-500 px-5 py-2 rounded-md font-semibold text-lg cursor-pointer hover:border-yellow-600 transition-all ease-in-out duration-300">
                 Contact Us
               </button>
             </Link>
@@ -33,7 +33,7 @@ const HomePage = () => {
         </div>
 
         {/* right section for image */}
-        <div className="w-1/2 flex items-center justify-center">
+        <div className="w-1/2  items-center justify-center hidden md:block">
           <img src={homePageMainImage} alt="home page image" />
         </div>
       </div>

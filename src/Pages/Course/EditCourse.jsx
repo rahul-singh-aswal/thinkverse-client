@@ -176,7 +176,7 @@ const EditCourse = () => {
           {/* heading */}
           <h1 className="text-center text-2xl font-bold">Update the Course</h1>
 
-          <main className="grid grid-cols-2 gap-x-16 p-10">
+          <main className="md:grid grid-cols-2 gap-x-16 p-10">
             {/* for course basic details */}
             <div className="space-y-6">
               <div>

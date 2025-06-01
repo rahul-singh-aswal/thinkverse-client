@@ -35,19 +35,25 @@ const CourseDescription = () => {
   return (
     <Layout>
       {/* wrapper for course description */}
-      <div className="min-h-[90vh] pt-12 px-20 flex flex-col items-center justify-center text-white ">
+      <div className="min-h-[90vh] pt-12 px-20 flex  flex-col items-center justify-center text-white ">
         {/* displaying the course details */}
-        <div className="grid grid-cols-2 gap-10 p-10 relative bg-zinc-700  rounded-lg hover:shadow-[0_0_10px_white]">
+        <div className="  md:grid grid-cols-2 gap-10 p-10 relative bg-zinc-700  rounded-lg hover:shadow-[0_0_10px_white]">
           {/* creating the left side of description box */}
           <div className="space-y-5">
             <img
-              className="w-full h-64 rounded-lg"
+              className=" border-white border-[1px] md:hidden w-full h-64 rounded-lg"
               src={state?.thumbnail?.secure_url}
               alt="thumbnail"
             />
+            
 
             {/* course details */}
             <div className="space-y-4">
+               <h1 className="text-3xl font-bold text-yellow-500  mb-4">{state.title}</h1>
+
+            <p className="text-yellow-500 font-bold">Course Description :</p>
+
+            <p>{state.description}</p>
               <div className="flex-col items-center justify-between text-xl">
                 <p className="font-semibold">
                   <span className="text-yellow-500 font-bold">Total Lectures : </span>
@@ -66,14 +72,14 @@ const CourseDescription = () => {
                       state: { ...state },
                     })
                   }
-                  className="  btn flex bg-yellow-600 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all  ease-in-out duration-300"
+                  className="  btn flex bg-yellow-500 text-xl rounded-md font-bold px-5 py-3 w-full hover:bg-yellow-600 transition-all  ease-in-out duration-300 my-2"
                 >
                   Watch Lectures
                 </button>
               ) : (
                 <button
                   onClick={() => navigate('/checkout')}
-                  className="btn bg-yellow-600 text-xl rounded-md text-center font-bold px-5 py-3 w-full hover:bg-yellow-500 transition-all ease-in-out duration-300"
+                  className="btn bg-yellow-500 text-xl rounded-md text-center font-bold px-5 py-3 w-full hover:bg-yellow-600 transition-all ease-in-out duration-300 my-2"
                 >
                   Subscribe to Course
                 </button>
@@ -83,16 +89,17 @@ const CourseDescription = () => {
 
           {/* creating the right section of description box */}
           <div className="space-y-2 text-xl">
-            <h1 className="text-3xl font-bold text-yellow-500  mb-4">{state.title}</h1>
-
-            <p className="text-yellow-500 font-bold">Course Description :</p>
-
-            <p>{state.description}</p>
+            <img
+              className="border-white border-[1px] hidden md:flex w-full h-64 rounded-lg"
+              src={state?.thumbnail?.secure_url}
+              alt="thumbnail"
+            />
+           
             {role === 'ADMIN' ? (
               <div className="flex flex-col gap-2">
                 <button
                   onClick={() => handleCourseDelete(state?._id)}
-                  className="btn bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 rounded-md font-bold"
+                  className="btn bg-red-500 hover:bg-red-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 my-2 rounded-md font-bold"
                 >
                   Delete Course
                 </button>
@@ -102,7 +109,7 @@ const CourseDescription = () => {
                       state: { ...state },
                     })
                   }
-                  className="btn bg-blue-500 hover:bg-blue-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 rounded-md font-bold"
+                  className="btn bg-blue-500 hover:bg-blue-600 transition-all ease-in-out duration-30 text-xl py-2 px-4 rounded-md font-bold my-1"
                 >
                   Edit Course Details
                 </button>
