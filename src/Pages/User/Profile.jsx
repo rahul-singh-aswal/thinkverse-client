@@ -51,7 +51,11 @@ const Profile = () => {
                 ? 'Active'
                 : 'Inactive'}
             </p>
-            <p>Valid Till :</p>
+            <p>
+              {userData?.role === 'USER' && new Date(userData?.subscription?.validTill) > currDate
+                ? 'Valid Till'
+                : ''}
+            </p>
             <p>
               {new Date(userData?.subscription?.validTill) > currDate
                 ? ` ${new Date(userData?.subscription?.validTill).toLocaleDateString('en-GB', {
@@ -89,7 +93,6 @@ const Profile = () => {
             </button>
           )}
 
-
           {/* {userData?.subscription?.status !== 'active' && (
             <button
               onClick={() => navigate('/checkout')}
@@ -98,8 +101,6 @@ const Profile = () => {
               Extend Subscription
             </button>
           )} */}
-
-         
         </div>
       </div>
     </Layout>

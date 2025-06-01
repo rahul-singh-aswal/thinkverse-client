@@ -23,6 +23,9 @@ import DisplayLectures from './Pages/Dashboard/DisplayLectures';
 import AddLecture from './Pages/Dashboard/AddLecture';
 import AdminDashboard from './Pages/Dashboard/AdminDashboard';
 import EditCourse from './Pages/Course/EditCourse';
+import ForgetPassword from './Pages/Password/ForgetPassword';
+import ResetPassword from './Pages/Password/ResetPassword';
+import ChangePassword from './Pages/Password/ChangePassword';
 
 function App() {
   return (
@@ -37,21 +40,24 @@ function App() {
         <Route path="/denied" element={<Denied />} />
         <Route path="/courses/description" element={<CourseDescription />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/reset-password/:resetToken" element={<ResetPassword />} />
 
         <Route element={<RequireAuth allowedRoles={['ADMIN']} />}>
           <Route path="/courses/create" element={<CreateCourse />} />
-           <Route path="/course/update" element={<EditCourse />} />
-           <Route path="/course/addlecture" element={<AddLecture />} />
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+          <Route path="/course/update" element={<EditCourse />} />
+          <Route path="/course/addlecture" element={<AddLecture />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
         </Route>
 
         <Route element={<RequireAuth allowedRoles={['ADMIN', 'USER']} />}>
           <Route path="/user/profile" element={<Profile />} />
           <Route path="/user/edit-profile" element={<EditProfile />} />
-           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/checkout/success" element={<CheckoutSuccess/>} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
           <Route path="/checkout/fail" element={<CheckoutFail />} />
-           <Route path="/courses/lectures" element={<DisplayLectures />} />
+          <Route path="/courses/lectures" element={<DisplayLectures />} />
+          <Route path="/changepassword" element={<ChangePassword />} />
         </Route>
       </Routes>
     </>

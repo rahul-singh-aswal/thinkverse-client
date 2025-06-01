@@ -192,13 +192,13 @@ const AdminDashboard = () => {
           <table className="table overflow-x-scroll">
             <thead>
               <tr>
-                <th>S No.</th>
-                <th>Course Title</th>
-                <th>Course Category</th>
-                <th>Instructor</th>
-                <th>Total Lectures</th>
-                <th>Course Description</th>
-                <th>Actions</th>
+                <th className="text-center">S No.</th>
+                <th className="text-center">Course Title</th>
+                <th className="text-center">Course Category</th>
+                <th className="text-center">Instructor</th>
+                <th className="text-center">Total Lectures</th>
+                {/* <th>Course Description</th> */}
+                <th className="text-center">Actions</th>
               </tr>
             </thead>
 
@@ -206,26 +206,27 @@ const AdminDashboard = () => {
               {myCourses?.map((element, index) => {
                 return (
                   <tr key={element?._id}>
-                    <td>{index + 1}</td>
-                    <td>
-                      <textarea
+                    <td className="text-center">{index + 1}</td>
+                    <td className="w-40 text-center h-auto bg-transparent resize-none">
+                      {/* <textarea
                         readOnly
-                        className="w-40 h-auto bg-transparent resize-none"
-                        value={element?.title}
-                      ></textarea>
+                        
+                        
+                      ></textarea>value={element?.title} */}
+                      {element?.title}
                     </td>
-                    <td>{element?.category}</td>
-                    <td>{element?.createdBy}</td>
-                    <td>{element?.numberOfLectures}</td>
-                    <td className="max-w-28 overflow-hidden text-ellipsis whitespace-nowrap">
+                    <td className="text-center">{element?.category}</td>
+                    <td className="text-center">{element?.createdBy}</td>
+                    <td className="text-center">{element?.numberOfLectures}</td>
+                    {/* <td className="max-w-28 overflow-hidden text-ellipsis whitespace-nowrap">
                       <textarea
                         readOnly
                         className="w-80 h-auto bg-transparent resize-none"
                         value={element?.description}
                       ></textarea>
-                    </td>
+                    </td> */}
 
-                    <td className="flex items-center gap-4">
+                    <td className="justify-center flex items-center gap-4">
                       {/* to edit the course */}
                       <button
                         onClick={() =>
