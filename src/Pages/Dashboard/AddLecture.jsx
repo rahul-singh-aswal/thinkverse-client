@@ -78,6 +78,8 @@ const AddLecture = () => {
           lecture: undefined,
         });
       }
+
+      navigate('/courses/lectures')
     } catch (err) {
       toast.dismiss();
       toast.error("Upload failed");
