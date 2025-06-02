@@ -79,7 +79,7 @@ const AddLecture = () => {
         });
       }
 
-      navigate('/courses/lectures')
+      navigate('/courses')
     } catch (err) {
       toast.dismiss();
       toast.error("Upload failed");
@@ -94,7 +94,7 @@ const AddLecture = () => {
   return (
     <Layout>
       <div className="text-white flex flex-col items-center justify-center gap-10 mx-16 min-h-[90vh]">
-        <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_black] w-96 rounded-lg">
+        <div className="flex flex-col gap-5 p-2 shadow-[0_0_10px_white] w-96 rounded-lg">
           <header className="flex items-center justify-center relative">
             <button onClick={() => navigate(-1)} className="absolute left-2 text-xl text-green-500">
               <AiOutlineArrowLeft />

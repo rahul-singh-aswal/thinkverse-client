@@ -32,7 +32,7 @@ const Profile = () => {
       <div className="min-h-[90vh] flex items-center justify-center">
         <div className="my-10 flex flex-col gap-4 rounded-lg p-2 text-white  md:max-w-[70vw] shadow-[0_0_10px_white]">
           <img
-            className="w-36 m-auto rounded-[50%] border border-black"
+            className="w-40 h-40 m-auto rounded-[50%] border border-black"
             src={userData?.avatar?.secure_url}
             alt="user profile image"
           />

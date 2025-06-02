@@ -38,9 +38,9 @@ const DisplayLectures = () => {
            {courseDetails?.title}
         </h1>
 
-        <div className="lg:flex justify-center gap-10 w-full">
+        <div className="flex flex-col lg:flex-row sm:items-center lg:items-start justify-center lg:gap-10 w-full">
           {/* left section for playing the video and displaying course details to admin */}
-          <div className="space-y-5 w-[28rem] p-2 rounded-tl-lg rounded-tr-lg border-white border-[1px]">
+          <div className="space-y-5 w-[28rem] p-2 lg:rounded-lg rounded-tl-lg rounded-tr-lg border-white border-[1px]">
             <video
               className="object-fill md:rounded-lg rounded-tl-lg rounded-tr-lg w-full"
               src={lectures && lectures[currentVideoIndex]?.lecture?.secure_url}

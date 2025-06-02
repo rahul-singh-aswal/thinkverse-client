@@ -46,9 +46,8 @@ const EditProfile = () => {
     try {
       const cloudData = new FormData();
       cloudData.append('file', file);
-      cloudData.append('upload_preset', 'thinkverse_uploads'); // 🔁 change this if needed
-      cloudData.append('cloud_name', 'djfymii3c'); // 🔁 your Cloudinary cloud name
-
+      cloudData.append('upload_preset', 'thinkverse_uploads'); 
+      cloudData.append('cloud_name', 'djfymii3c'); 
       const response = await axios.post(
         'https://api.cloudinary.com/v1_1/djfymii3c/image/upload',
         cloudData
